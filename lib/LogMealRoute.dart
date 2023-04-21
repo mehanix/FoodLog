@@ -31,24 +31,16 @@ class _LogMealRouteState extends State<LogMealRoute>
       TweenSequenceItem(
           weight: 1.0, tween: ColorTween(begin: Colors.pink, end: Colors.blue)),
       TweenSequenceItem(
-          weight: 1.0, tween: ColorTween(begin: Colors.blue, end: Colors.green)),
+          weight: 1.0,
+          tween: ColorTween(begin: Colors.blue, end: Colors.green)),
       TweenSequenceItem(
-          weight: 1.0, tween: ColorTween(begin: Colors.green, end: Colors.yellow)),
+          weight: 1.0,
+          tween: ColorTween(begin: Colors.green, end: Colors.yellow)),
       TweenSequenceItem(
           weight: 1.0,
           tween: ColorTween(begin: Colors.yellow, end: Colors.red)),
     ]);
     animatedColor = bgColor.animate(controller);
-    // animation =
-
-    //       ..addListener(() {
-    //         if (controller.isCompleted) {
-    //           controller.repeat(reverse: true);
-    //         }
-    //         setState(() {
-    //           // The state that has changed here is the animation object’s value.
-    //         });
-    //       });
   }
 
   @override
@@ -76,10 +68,13 @@ class _LogMealRouteState extends State<LogMealRoute>
                       builder: (context) => const AddEditMealRoute()),
                 );
               },
-              icon: Icon(Icons.add),
+              icon: Icon(Icons.add,size: 30,),
               label: Text(
-                "Log new meal!",
-                style: TextStyle(fontSize: 20),
+                "Log meal!",
+                style: TextStyle(
+                    fontFamily: 'Satisfy',
+                    fontSize: 32,
+                    fontWeight: FontWeight.bold),
               )),
         );
       },

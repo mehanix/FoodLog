@@ -1,6 +1,7 @@
+import 'package:dezvapmobile/model/FoodLog.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-
+import 'package:dezvapmobile/util/database_helper.dart';
 import 'MealAddedCongratsRoute.dart';
 
 class AddEditMealRoute extends StatelessWidget {
@@ -30,19 +31,20 @@ class MyCustomForm extends StatefulWidget {
 // Define a corresponding State class.
 // This class holds data related to the form.
 class MyCustomFormState extends State<MyCustomForm> {
-  // Create a global key that uniquely identifies the Form widget
-  // and allows validation of the form.
-  //
-  // Note: This is a `GlobalKey<FormState>`,
-  // not a GlobalKey<MyCustomFormState>.
   final _formKey = GlobalKey<FormState>();
   TextEditingController dateinput = TextEditingController();
+
+  FoodLog _foodLog = FoodLog();
+  late DatabaseHelper _dbHelper;
 
   @override
   void initState() {
     dateinput.text = ""; //set the initial value of text field
+    _dbHelper = DatabaseHelper.instance;
     super.initState();
   }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -66,8 +68,10 @@ class MyCustomFormState extends State<MyCustomForm> {
                 // The validator receives the text that the user has entered.
                 validator: (value) {
                   if (value == null || value.isEmpty) {
+                    _foodLog.foodName = null;
                     return 'You must complete what you ate';
                   }
+                  _foodLog.foodName = value;
                   return null;
                 },
               ),
@@ -103,6 +107,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                       setState(() {
                         dateinput.text =
                             formattedDate; //set output date to TextField value.
+                        _foodLog.date = formattedDate;
                       });
                     } else {
                       print("Date is not selected");
@@ -120,25 +125,31 @@ class MyCustomFormState extends State<MyCustomForm> {
                 // The validator receives the text that the user has entered.
                 validator: (value) {
                   if (value == null || value.isEmpty) {
+                    _foodLog.calories = null;
                     return null;
                   }
                   if (int.tryParse(value) == null) {
                     return 'Value must be natural number';
                   }
+                  _foodLog.calories = int.parse(value);
+                  return null;
                 },
               ),
             ),
 
             ElevatedButton(
-              onPressed: () {
-                // Validate returns true if the form is valid, or false otherwise.
+              onPressed: () async {
                 if (_formKey.currentState!.validate()) {
-                  // If the form is valid, display a snackbar. In the real world,
-                  // you'd often call a server or save the information in a database.
-                  // ScaffoldMessenger.of(context).showSnackBar(
-                  //   const SnackBar(content: Text('Processing Data')),
-                  // );
-                  Navigator.of(context).push(animatedTransitionMealAddedCongratsRoute());
+                  _formKey.currentState!.save();
+                  if (_foodLog.id == null) {
+                    await _dbHelper.insertFoodLog(_foodLog);
+                  } else {
+                    await _dbHelper.updateFoodLog(_foodLog);
+                  }
+
+                  print(_foodLog.calories);
+                  Navigator.of(context)
+                      .push(animatedTransitionMealAddedCongratsRoute());
                 }
               },
               child: const Text('Submit'),
@@ -149,4 +160,3 @@ class MyCustomFormState extends State<MyCustomForm> {
     );
   }
 }
-
