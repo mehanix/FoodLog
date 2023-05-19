@@ -1,6 +1,8 @@
-# Food Log
+# Food Log - Introduction to Mobile Development Course
 
 Food Log este un "food diary" - o aplicatie folosita pentru a mentine evidenta meselor dintr-o zi. Este utila celor care doresc sa aiba mai mult control asupra obiceiurilor alimentare proprii.
+
+<Center><img src="app.gif" width="250" /></Center>
 
 # Barem - Functionalitati
 
