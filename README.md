@@ -2,7 +2,9 @@
 
 Food Log este un "food diary" - o aplicatie folosita pentru a mentine evidenta meselor dintr-o zi. Este utila celor care doresc sa aiba mai mult control asupra obiceiurilor alimentare proprii.
 
-<Center><img src="app.gif" /></Center>
+<p align="center">
+<img align="center" src="app.gif" width="300"/>
+</p>
 
 # Barem - Functionalitati
 
