@@ -17,6 +17,7 @@ class AddEditMealRoute extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
       appBar: AppBar(
           title: (prevFoodLog == null ? Text('Add meal') : Text('Edit meal'))),
       body: MyCustomForm(
