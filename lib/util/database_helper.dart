@@ -41,9 +41,10 @@ class DatabaseHelper {
   }
 
   //contact - insert
-  void insertFoodLog(FoodLog log) async {
+  Future<int> insertFoodLog(FoodLog log) async {
     Database db = await database;
-    await db.insert(FoodLog.tableName, log.toMap());
+    int id = await db.insert(FoodLog.tableName, log.toMap());
+    return id;
   }
 
 //contact - update

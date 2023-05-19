@@ -133,12 +133,22 @@ class _LogHistoryRouteState extends State<LogHistoryRoute> {
                     return Card(
                       child: Column(
                           mainAxisSize: MainAxisSize.min,
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: <Widget>[
                             ListTile(
                               leading: Icon(Icons.food_bank),
                               title: Text(
                                 logList[index].date!,
                               ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text("Food: ${logList[index].foodName!}"),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Text(
+                                  "Calories: ${logList[index].calories.toString()}"),
                             ),
                             ButtonBar(
                               children: <Widget>[

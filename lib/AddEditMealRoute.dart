@@ -191,7 +191,7 @@ class MyCustomFormState extends State<MyCustomForm> {
                 }
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
-                  if (_foodLog.id == null) {
+                  if (widget.prevFoodLog == null) {
                     Provider.of<FoodLogProvider>(context, listen: false)
                         .add(_foodLog);
                   } else {

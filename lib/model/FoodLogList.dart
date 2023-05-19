@@ -37,9 +37,10 @@ class FoodLogProvider with ChangeNotifier {
 
   int get length => _items.length;
 
-  void add(FoodLog item) {
+  Future<void> add(FoodLog item) async {
+    int id = await _dbHelper.insertFoodLog(item);
+    item.id = id;
     _items.add(item);
-    _dbHelper.insertFoodLog(item);
     notifyListeners();
   }
 
