@@ -4,6 +4,8 @@ Food Log este un "food diary" - o aplicatie folosita pentru a mentine evidenta m
 
 # Barem - Functionalitati
 
+#### 1p oficiu
+
 #### 2p
 * ☑️ Persistenta datelor(SQLite):
   * ☑️ Inserare
