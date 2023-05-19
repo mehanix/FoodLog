@@ -1,0 +1,68 @@
+{
+  "project_info": {
+    "project_number": "326778528755",
+    "project_id": "food-log-fb39d",
+    "storage_bucket": "food-log-fb39d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326778528755:android:b2e4be3367c008c0682886",
+        "android_client_info": {
+          "package_name": "com.example.dezvapmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "326778528755-9429d8fbj1f9o0nrbj4q7p5rs7ks7fi3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpYcex6DuphdiRP-Qo_dX_8ME67jpVK7c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "326778528755-9429d8fbj1f9o0nrbj4q7p5rs7ks7fi3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:326778528755:android:c0a1de905dbae0e8682886",
+        "android_client_info": {
+          "package_name": "com.mehanix.dezvapmobile"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "326778528755-9429d8fbj1f9o0nrbj4q7p5rs7ks7fi3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCpYcex6DuphdiRP-Qo_dX_8ME67jpVK7c"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "326778528755-9429d8fbj1f9o0nrbj4q7p5rs7ks7fi3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

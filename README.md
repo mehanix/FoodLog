@@ -1,16 +1,29 @@
-# dezvapmobile
+# Food Log
 
-A new Flutter project.
+Food Log este un "food diary" - o aplicatie folosita pentru a mentine evidenta meselor dintr-o zi. Este utila celor care doresc sa aiba mai mult control asupra obiceiurilor alimentare proprii.
 
-## Getting Started
+# Barem - Functionalitati
 
-This project is a starting point for a Flutter application.
+#### 2p
+* Persistenta datelor(SQLite):
+  * Inserare
+  * Citire
+  * Actualizare
+  * Stergere
 
-A few resources to get you started if this is your first Flutter project:
+#### 1p
+* Web services - Firebase (Firebase Storage pentru imagini)
+* Navigation (Drawer widget & tabs)
+* State management - folosind Provider
+* Playing videos
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+#### 0.5p
+* Implementat o animatie folosind AnimationController
+* Implementat o animatie personalizata pentru tranzitia dintre ecrane
+* Implementat un ListView
+* Implementat un GridView
+* Importat content media (poze sau video) din media library
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#### 0.25p
+* Afisat un snackbar
+* Utilizat un font personalizat

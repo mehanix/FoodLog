@@ -1,8 +1,14 @@
+import 'dart:io';
+
 import 'package:dezvapmobile/model/FoodLog.dart';
+import 'package:dezvapmobile/model/FoodLogList.dart';
+import 'package:dezvapmobile/storage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:dezvapmobile/util/database_helper.dart';
+import 'package:provider/provider.dart';
 import 'MealAddedCongratsRoute.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AddEditMealRoute extends StatelessWidget {
   const AddEditMealRoute({super.key});
@@ -32,10 +38,15 @@ class MyCustomForm extends StatefulWidget {
 // This class holds data related to the form.
 class MyCustomFormState extends State<MyCustomForm> {
   final _formKey = GlobalKey<FormState>();
+  final Storage storage = Storage();
+
   TextEditingController dateinput = TextEditingController();
 
   FoodLog _foodLog = FoodLog();
   late DatabaseHelper _dbHelper;
+
+  ImagePicker picker = ImagePicker();
+  XFile? image;
 
   @override
   void initState() {
@@ -43,8 +54,6 @@ class MyCustomFormState extends State<MyCustomForm> {
     _dbHelper = DatabaseHelper.instance;
     super.initState();
   }
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -54,8 +63,12 @@ class MyCustomFormState extends State<MyCustomForm> {
       child: Form(
         key: _formKey,
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: <Widget>[
             // Add TextFormFields and ElevatedButton here.
+            image == null
+                ? Container()
+                : Image.file(File(image!.path), height: 300, fit: BoxFit.cover),
 
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -136,13 +149,36 @@ class MyCustomFormState extends State<MyCustomForm> {
                 },
               ),
             ),
+            ElevatedButton(
+                onPressed: () async {
+                  image = await picker.pickImage(source: ImageSource.gallery);
 
+                  if (image == null) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        const SnackBar(content: Text('No photo selected')));
+                  } else {
+                    storage
+                        .uploadFile(image!.path, image!.name)
+                        .then((value) => {
+                              setState(() {
+                                _foodLog.photo = image!.name;
+                              })
+                            });
+                  }
+                },
+                child: Text("Pick Image")),
             ElevatedButton(
               onPressed: () async {
+                if (_foodLog.photo == null) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(content: Text('No photo selected')));
+                  return;
+                }
                 if (_formKey.currentState!.validate()) {
                   _formKey.currentState!.save();
                   if (_foodLog.id == null) {
-                    await _dbHelper.insertFoodLog(_foodLog);
+                    Provider.of<FoodLogProvider>(context, listen: false)
+                        .add(_foodLog);
                   } else {
                     await _dbHelper.updateFoodLog(_foodLog);
                   }

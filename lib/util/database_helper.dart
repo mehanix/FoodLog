@@ -35,38 +35,35 @@ class DatabaseHelper {
         ${FoodLog.colFoodName} TEXT NOT NULL,
         ${FoodLog.colCalories} INTEGER NOT NULL,
         ${FoodLog.colDate} DATE NOT NULL,
-        ${FoodLog.colMealType} INTEGER,
         ${FoodLog.colPhoto} TEXT
       )
       ''');
   }
 
   //contact - insert
-  Future<int> insertFoodLog(FoodLog log) async {
+  void insertFoodLog(FoodLog log) async {
     Database db = await database;
-    return await db.insert(FoodLog.tableName, log.toMap());
+    await db.insert(FoodLog.tableName, log.toMap());
   }
 
 //contact - update
-Future<int> updateFoodLog(FoodLog log) async {
-  Database db = await database;
-  return await db.update(FoodLog.tableName, log.toMap(),
-      where: '${FoodLog.colId}=?', whereArgs: [log.id]);
-}
+  Future<int> updateFoodLog(FoodLog log) async {
+    Database db = await database;
+    return await db.update(FoodLog.tableName, log.toMap(),
+        where: '${FoodLog.colId}=?', whereArgs: [log.id]);
+  }
+
 //contact - delete
-Future<int> deleteFoodLog(int id) async {
-  Database db = await database;
-  return await db.delete(FoodLog.tableName,
-      where: '${FoodLog.colId}=?', whereArgs: [id]);
-}
+  Future<int> deleteFoodLog(int id) async {
+    Database db = await database;
+    return await db.delete(FoodLog.tableName,
+        where: '${FoodLog.colId}=?', whereArgs: [id]);
+  }
+
 //contact - retrieve all
-Future<List<FoodLog>> fetchFoodLogs() async {
-  Database db = await database;
-  List<Map> logs = await db.query(FoodLog.tableName);
-  return logs.isEmpty
-      ? []
-      : logs.map((x) => FoodLog.fromMap(x)).toList();
+  Future<List<FoodLog>> fetchFoodLogs() async {
+    Database db = await database;
+    List<Map> logs = await db.query(FoodLog.tableName);
+    return logs.isEmpty ? [] : logs.map((x) => FoodLog.fromMap(x)).toList();
+  }
 }
-}
-
-
