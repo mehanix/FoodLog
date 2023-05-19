@@ -65,10 +65,15 @@ class _LogMealRouteState extends State<LogMealRoute>
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const AddEditMealRoute()),
+                      builder: (context) => const AddEditMealRoute(
+                            prevFoodLog: null,
+                          )),
                 );
               },
-              icon: Icon(Icons.add,size: 30,),
+              icon: Icon(
+                Icons.add,
+                size: 30,
+              ),
               label: Text(
                 "Log meal!",
                 style: TextStyle(

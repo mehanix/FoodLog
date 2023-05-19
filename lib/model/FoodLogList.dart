@@ -11,6 +11,13 @@ class FoodLogProvider with ChangeNotifier {
   /// Internal, private state of the cart.
   final List<FoodLog> _items = [];
 
+  // int mode = 0;
+
+  // void setMode(mode) {
+  //   mode = 0;
+  //   notifyListeners();
+  // }
+
   // Future loadList() async {
   //   // // List<FoodLog> dbFoodLogList = await _dbHelper.fetchFoodLogs();
   //   // // _items.clear();
@@ -33,6 +40,19 @@ class FoodLogProvider with ChangeNotifier {
   void add(FoodLog item) {
     _items.add(item);
     _dbHelper.insertFoodLog(item);
+    notifyListeners();
+  }
+
+  void update(FoodLog item) {
+    final target = _items.firstWhere((element) => element.id == item.id);
+    final updateIndex = _items.indexOf(target);
+
+    _items[updateIndex].id = item.id;
+    _items[updateIndex].calories = item.calories;
+    _items[updateIndex].date = item.date;
+    _items[updateIndex].foodName = item.foodName;
+    _items[updateIndex].photo = item.photo;
+    _dbHelper.updateFoodLog(item);
     notifyListeners();
   }
 

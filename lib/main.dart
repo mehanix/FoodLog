@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    precacheImage(AssetImage("assets/me.png"), context);
     return ChangeNotifierProvider<FoodLogProvider>(
       create: (context) => FoodLogProvider(),
       child: MaterialApp(
@@ -38,7 +39,9 @@ class MyApp extends StatelessWidget {
           // When navigating to the "/" route, build the FirstScreen widget.
           '/': (context) => MainWindowRoute(),
           // When navigating to the "/second" route, build the SecondScreen widget.
-          '/addedit': (context) => const AddEditMealRoute(),
+          '/addedit': (context) => const AddEditMealRoute(
+                prevFoodLog: null,
+              ),
           '/congrats': (context) => const MealAddedCongratsRoute(),
         },
       ),

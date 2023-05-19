@@ -1,5 +1,6 @@
 import 'dart:collection';
 
+import 'package:dezvapmobile/AddEditMealRoute.dart';
 import 'package:dezvapmobile/model/FoodLog.dart';
 import 'package:dezvapmobile/model/FoodLogList.dart';
 import 'package:dezvapmobile/storage_service.dart';
@@ -96,7 +97,13 @@ class _LogHistoryRouteState extends State<LogHistoryRoute> {
                                 IconButton(
                                   icon: Icon(Icons.edit),
                                   onPressed: () {
-                                    // To do
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              AddEditMealRoute(
+                                                  prevFoodLog: logList[index])),
+                                    );
                                   },
                                 ),
                                 IconButton(
@@ -138,7 +145,13 @@ class _LogHistoryRouteState extends State<LogHistoryRoute> {
                                 IconButton(
                                   icon: Icon(Icons.edit),
                                   onPressed: () {
-                                    // To do
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              AddEditMealRoute(
+                                                  prevFoodLog: logList[index])),
+                                    );
                                   },
                                 ),
                                 IconButton(

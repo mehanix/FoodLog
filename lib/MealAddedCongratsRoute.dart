@@ -10,7 +10,7 @@ Route animatedTransitionMealAddedCongratsRoute() {
     pageBuilder: (context, animation, secondaryAnimation) =>
         const MealAddedCongratsRoute(),
     transitionsBuilder: (context, animation, secondaryAnimation, child) {
-      const begin = Offset(1.0, 0.0);
+      const begin = Offset(-1.0, 1.0);
       const end = Offset.zero;
       const curve = Curves.ease;
       final tween =
@@ -99,11 +99,11 @@ class _MealAddedCongratsRouteState extends State<MealAddedCongratsRoute> {
               child: Text(
                 'You have successfully logged a new meal',
                 style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 17,
-                    ),
-                    textAlign: TextAlign.center,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 17,
+                ),
+                textAlign: TextAlign.center,
               ),
             ),
           ),

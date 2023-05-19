@@ -29,13 +29,6 @@ class _MainWindowRouteState extends State<MainWindowRoute> {
                   child: Text('Food Log'),
                 ),
                 ListTile(
-                  title: const Text('Clear entire DB'),
-                  onTap: () {
-                    // Update the state of the app.
-                    // ...
-                  },
-                ),
-                ListTile(
                   title: const Text('About'),
                   onTap: () {
                     Navigator.push(
@@ -68,4 +61,3 @@ class _MainWindowRouteState extends State<MainWindowRoute> {
     );
   }
 }
-

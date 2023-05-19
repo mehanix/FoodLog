@@ -5,29 +5,32 @@ import 'package:dezvapmobile/model/FoodLogList.dart';
 import 'package:dezvapmobile/storage_service.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:dezvapmobile/util/database_helper.dart';
 import 'package:provider/provider.dart';
 import 'MealAddedCongratsRoute.dart';
 import 'package:image_picker/image_picker.dart';
 
 class AddEditMealRoute extends StatelessWidget {
-  const AddEditMealRoute({super.key});
+  const AddEditMealRoute({super.key, required this.prevFoodLog});
+
+  final FoodLog? prevFoodLog;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Add/Edit meal'),
+          title: (prevFoodLog == null ? Text('Add meal') : Text('Edit meal'))),
+      body: MyCustomForm(
+        prevFoodLog: prevFoodLog,
       ),
-      body: MyCustomForm(),
     );
   }
 }
 
 // Define a custom Form widget.
 class MyCustomForm extends StatefulWidget {
-  const MyCustomForm({super.key});
+  const MyCustomForm({super.key, required this.prevFoodLog});
 
+  final FoodLog? prevFoodLog;
   @override
   MyCustomFormState createState() {
     return MyCustomFormState();
@@ -43,7 +46,6 @@ class MyCustomFormState extends State<MyCustomForm> {
   TextEditingController dateinput = TextEditingController();
 
   FoodLog _foodLog = FoodLog();
-  late DatabaseHelper _dbHelper;
 
   ImagePicker picker = ImagePicker();
   XFile? image;
@@ -51,7 +53,14 @@ class MyCustomFormState extends State<MyCustomForm> {
   @override
   void initState() {
     dateinput.text = ""; //set the initial value of text field
-    _dbHelper = DatabaseHelper.instance;
+    if (widget.prevFoodLog != null) {
+      dateinput.text = widget.prevFoodLog!.date!;
+      _foodLog.id = widget.prevFoodLog!.id;
+      _foodLog.foodName = widget.prevFoodLog!.foodName;
+      _foodLog.date = widget.prevFoodLog!.date;
+      _foodLog.photo = widget.prevFoodLog!.photo;
+      _foodLog.calories = widget.prevFoodLog!.calories;
+    }
     super.initState();
   }
 
@@ -73,6 +82,9 @@ class MyCustomFormState extends State<MyCustomForm> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
+                initialValue: widget.prevFoodLog != null
+                    ? widget.prevFoodLog!.foodName
+                    : "",
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     labelText: 'What did you eat?',
@@ -130,6 +142,9 @@ class MyCustomFormState extends State<MyCustomForm> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
+                initialValue: widget.prevFoodLog != null
+                    ? widget.prevFoodLog!.calories.toString()
+                    : "",
                 decoration: InputDecoration(
                     border: OutlineInputBorder(),
                     icon: Icon(Icons.electric_bolt), //icon of text field
@@ -180,12 +195,17 @@ class MyCustomFormState extends State<MyCustomForm> {
                     Provider.of<FoodLogProvider>(context, listen: false)
                         .add(_foodLog);
                   } else {
-                    await _dbHelper.updateFoodLog(_foodLog);
+                    Provider.of<FoodLogProvider>(context, listen: false)
+                        .update(_foodLog);
+                    // await _dbHelper.updateFoodLog(_foodLog);
                   }
 
-                  print(_foodLog.calories);
-                  Navigator.of(context)
-                      .push(animatedTransitionMealAddedCongratsRoute());
+                  if (widget.prevFoodLog == null) {
+                    Navigator.of(context)
+                        .push(animatedTransitionMealAddedCongratsRoute());
+                  } else {
+                    Navigator.pop(context);
+                  }
                 }
               },
               child: const Text('Submit'),
